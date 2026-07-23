@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Branch } from "@/lib/types/location";
 import { isLiveLink } from "@/lib/constants";
@@ -18,6 +19,23 @@ export function LocationCard({ branch }: { branch: Branch }) {
 
   return (
     <article className="group flex h-full flex-col rounded-3xl border border-[var(--border)] bg-white p-6 sm:p-8 shadow-sm transition-all duration-300 hover:shadow-xl hover:border-[var(--brand-accent)]/50 hover:-translate-y-1">
+      {branch.imageSrc ? (
+        <div className="relative -mx-6 -mt-6 sm:-mx-8 sm:-mt-8 mb-5 aspect-[16/9] overflow-hidden rounded-t-3xl">
+          <Image
+            src={branch.imageSrc}
+            alt={`${branch.name} restaurant`}
+            fill
+            sizes="(max-width: 640px) 100vw, 50vw"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+          {branch.label ? (
+            <span className="absolute top-4 right-4 rounded-full bg-amber-500/90 px-3 py-1 text-xs font-bold text-white uppercase tracking-wider shadow-lg">
+              {branch.label}
+            </span>
+          ) : null}
+        </div>
+      ) : null}
       <div className="flex items-start justify-between gap-3">
         <div>
           <h3 className="font-display text-2xl font-bold text-[var(--brand-primary)] group-hover:text-[var(--brand-accent)] transition-colors">
@@ -28,7 +46,7 @@ export function LocationCard({ branch }: { branch: Branch }) {
             <span>{branch.area}, {branch.city}</span>
           </p>
         </div>
-        {branch.label ? (
+        {branch.label && !branch.imageSrc ? (
           <span className="shrink-0 rounded-full bg-amber-500/10 border border-amber-500/30 px-3 py-1 text-xs font-bold text-amber-800 uppercase tracking-wider">
             {branch.label}
           </span>

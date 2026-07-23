@@ -2,7 +2,8 @@ import Image from "next/image";
 import { STORY } from "@/lib/data/story";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
-import { Globe2, ArrowRight, Award, Flame } from "lucide-react";
+import { CELEBRITY_IMAGES, ABOUT_IMAGES } from "@/lib/data/unsplash";
+import { ArrowRight, Award, Flame } from "lucide-react";
 
 export function StoryPreview() {
   return (
@@ -30,7 +31,15 @@ export function StoryPreview() {
         {/* Zuckerberg quote — overlapping bottom edge */}
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[92%] max-w-3xl translate-y-1/2 z-10">
           <div className="glass-panel-dark p-5 rounded-2xl border border-amber-500/40 shadow-2xl flex items-start gap-4">
-            <Globe2 className="h-6 w-6 text-amber-400 shrink-0 mt-0.5" />
+            <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full border-2 border-amber-500/50 shadow-lg">
+              <Image
+                src={CELEBRITY_IMAGES["Mark Zuckerberg"].src}
+                alt={CELEBRITY_IMAGES["Mark Zuckerberg"].alt}
+                fill
+                sizes="48px"
+                className="object-cover"
+              />
+            </div>
             <div>
               <p className="text-xs font-bold uppercase tracking-wider text-amber-300 mb-1">Celebrity Visit</p>
               <p className="text-sm text-amber-100/90 leading-relaxed italic">
@@ -61,8 +70,23 @@ export function StoryPreview() {
         {/* Two-column compact text + stats */}
         <div className="grid gap-10 lg:grid-cols-2 max-w-5xl mx-auto">
 
-          {/* Left: Story narrative */}
-          <div className="space-y-4">
+          {/* Left: Story narrative + founder portrait */}
+          <div className="space-y-5">
+            <div className="flex gap-5 items-start">
+              <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-2xl border-2 border-amber-500/30 shadow-lg">
+                <Image
+                  src={ABOUT_IMAGES.founder.src}
+                  alt={ABOUT_IMAGES.founder.alt}
+                  fill
+                  sizes="96px"
+                  className="object-cover"
+                />
+              </div>
+              <div>
+                <p className="text-xs font-bold uppercase tracking-wider text-amber-400 mb-1">Founder</p>
+                <p className="font-display text-xl font-semibold text-white">Mary Auma Oliech</p>
+              </div>
+            </div>
             <p className="text-base text-amber-50/95 leading-relaxed">
               {STORY.founder.summary}
             </p>

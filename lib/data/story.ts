@@ -1,9 +1,10 @@
 /**
  * Story / heritage content — from website content + ops docs.
- * Suitable for public About + table QR portal.
+ * Celebrity photos: Unsplash demo stock (not official likenesses).
  */
 
 import type { StoryContent } from "@/lib/types/story";
+import { CELEBRITY_IMAGES } from "@/lib/data/unsplash";
 
 export const STORY: StoryContent = {
   founder: {
@@ -31,22 +32,30 @@ export const STORY: StoryContent = {
       name: "Barack Obama",
       title: "Former U.S. President",
       note: "One of the world leaders who has shared a table at Mama Oliech’s.",
+      imageSrc: CELEBRITY_IMAGES["Barack Obama"].src,
+      imageAlt: CELEBRITY_IMAGES["Barack Obama"].alt,
     },
     {
       name: "Mark Zuckerberg",
       title: "Founder, Facebook",
       note: "His visit inspired the house “Zuckerberg Special” — a premium whole tilapia.",
       relatedMenuItemId: "zuckerberg-special",
+      imageSrc: CELEBRITY_IMAGES["Mark Zuckerberg"].src,
+      imageAlt: CELEBRITY_IMAGES["Mark Zuckerberg"].alt,
     },
     {
       name: "Anthony Bourdain",
       title: "Chef & storyteller",
       note: "Celebrated authentic kitchens around the world — including this one.",
+      imageSrc: CELEBRITY_IMAGES["Anthony Bourdain"].src,
+      imageAlt: CELEBRITY_IMAGES["Anthony Bourdain"].alt,
     },
     {
       name: "Idris Elba",
       title: "Actor",
       note: "Among the cultural figures who have pulled up a chair.",
+      imageSrc: CELEBRITY_IMAGES["Idris Elba"].src,
+      imageAlt: CELEBRITY_IMAGES["Idris Elba"].alt,
     },
   ],
   heritageFacts: [

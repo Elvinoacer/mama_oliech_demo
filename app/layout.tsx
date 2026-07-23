@@ -43,6 +43,20 @@ export const metadata: Metadata = {
     siteName: BRAND.name,
     title: BRAND.name,
     description: BRAND.heroSubheadline,
+    images: [
+      {
+        url: "/images/food/hero-tilapia-feast.jpg",
+        width: 1200,
+        height: 630,
+        alt: `${BRAND.name} — Authentic Kenyan Cuisine`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: BRAND.name,
+    description: BRAND.heroSubheadline,
+    images: ["/images/food/hero-tilapia-feast.jpg"],
   },
 };
 

@@ -123,21 +123,32 @@ export function MenuTicker() {
         ))}
 
         {/* Bonus CTA card in the grid */}
-        <div className="flex flex-col justify-center items-center text-center p-8 rounded-3xl bg-gradient-to-br from-[#25150d] to-[#120905] text-white border border-amber-900/40 shadow-xl space-y-4">
-          <div className="h-12 w-12 rounded-full bg-amber-500/20 border border-amber-400/30 flex items-center justify-center">
-            <Utensils className="h-6 w-6 text-amber-400" />
+        <div className="relative overflow-hidden flex flex-col justify-center items-center text-center p-8 rounded-3xl bg-gradient-to-br from-[#25150d] to-[#120905] text-white border border-amber-900/40 shadow-xl space-y-4 group">
+          <Image
+            src="/images/food/hero-tilapia-feast.jpg"
+            alt="Mama Oliech Menu Background"
+            fill
+            sizes="(max-width: 1024px) 100vw, 33vw"
+            className="object-cover opacity-20 filter saturate-150 transition-transform duration-700 group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#25150d]/80 via-[#180e08]/90 to-[#120905]" />
+
+          <div className="relative z-10 space-y-4 flex flex-col items-center">
+            <div className="h-12 w-12 rounded-full bg-amber-500/20 border border-amber-400/30 flex items-center justify-center shadow-lg">
+              <Utensils className="h-6 w-6 text-amber-400" />
+            </div>
+            <h3 className="font-display text-2xl font-bold text-white">Full Restaurant Menu</h3>
+            <p className="text-xs text-amber-100/80 leading-relaxed">
+              Explore our complete offerings including catch-weight fish portions, traditional Luo indigenous greens, ugali varieties, cold drinks, and group packages.
+            </p>
+            <Button
+              href="/menu"
+              size="lg"
+              className="bg-amber-500 text-slate-950 font-bold hover:bg-amber-400 border-none transition-all w-full shadow-lg"
+            >
+              <span>Explore Complete Menu</span>
+            </Button>
           </div>
-          <h3 className="font-display text-2xl font-bold text-white">Full Restaurant Menu</h3>
-          <p className="text-xs text-amber-100/80 leading-relaxed">
-            Explore our complete offerings including catch-weight fish portions, traditional Luo indigenous greens, ugali varieties, cold drinks, and group packages.
-          </p>
-          <Button
-            href="/menu"
-            size="lg"
-            className="bg-amber-500 text-slate-950 font-bold hover:bg-amber-400 border-none transition-all w-full"
-          >
-            <span>Explore Complete Menu</span>
-          </Button>
         </div>
       </div>
     </Section>

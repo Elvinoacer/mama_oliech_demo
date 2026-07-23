@@ -3,6 +3,7 @@ import { BRAND, EXTERNAL_LINKS } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { UtensilsCrossed, ShoppingBag, MapPin, Sparkles, Star, Award, Flame } from "lucide-react";
+import { CELEBRITY_IMAGES } from "@/lib/data/unsplash";
 
 export function Hero() {
   return (
@@ -76,15 +77,34 @@ export function Hero() {
 
             {/* Social Proof / Celebrities ticker */}
             <div className="pt-6 border-t border-white/10">
-              <div className="flex items-center gap-3 mb-2">
+              <div className="flex items-center gap-3 mb-3">
                 <Award className="h-4 w-4 text-amber-400" />
                 <span className="text-xs uppercase tracking-widest text-amber-200/70 font-semibold">
                   Global Acclaim & Celebrity Visits
                 </span>
               </div>
-              <p className="text-sm sm:text-base text-amber-100/90 font-medium italic">
-                "{BRAND.trustBar}"
-              </p>
+              <div className="flex items-center gap-4">
+                <div className="flex -space-x-3">
+                  {Object.entries(CELEBRITY_IMAGES).map(([name, img]) => (
+                    <div
+                      key={name}
+                      className="relative h-10 w-10 overflow-hidden rounded-full border-2 border-amber-500/50 shadow-lg transition-transform hover:scale-110 hover:z-10"
+                      title={name}
+                    >
+                      <Image
+                        src={img.src}
+                        alt={img.alt}
+                        fill
+                        sizes="40px"
+                        className="object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
+                <p className="text-sm text-amber-100/80 font-medium italic">
+                  "{BRAND.trustBar}"
+                </p>
+              </div>
             </div>
 
           </div>

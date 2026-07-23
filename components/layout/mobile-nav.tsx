@@ -2,8 +2,9 @@
 
 import { useEffect, useId, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { NAV_LINKS } from "@/lib/constants";
+import { BRAND, NAV_LINKS } from "@/lib/constants";
 import { cn } from "@/lib/utils/cn";
 
 export function MobileNav() {
@@ -73,11 +74,24 @@ export function MobileNav() {
             className="absolute top-0 right-0 flex h-full w-[min(100%,20rem)] flex-col bg-[var(--surface-elevated)] p-6 shadow-xl"
             aria-label="Mobile"
           >
-            <div className="mb-6 flex items-center justify-between">
-              <p className="font-semibold">Menu</p>
+            <div className="mb-6 flex items-center justify-between border-b border-[var(--border)] pb-4">
+              <div className="flex items-center gap-2.5">
+                <div className="relative h-9 w-9 shrink-0 overflow-hidden rounded-full border border-amber-500/30">
+                  <Image
+                    src="/images/logo.svg"
+                    alt={`${BRAND.name} Logo`}
+                    fill
+                    sizes="36px"
+                    className="object-contain"
+                  />
+                </div>
+                <span className="font-display font-bold text-lg text-[var(--brand-primary)]">
+                  {BRAND.shortName}
+                </span>
+              </div>
               <button
                 type="button"
-                className="rounded-full px-3 py-1 text-sm opacity-70 hover:opacity-100"
+                className="rounded-full px-3 py-1 text-sm opacity-70 hover:opacity-100 font-semibold"
                 onClick={() => setOpen(false)}
               >
                 Close

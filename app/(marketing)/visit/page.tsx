@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { EXTERNAL_LINKS, isLiveLink } from "@/lib/constants";
 import { getActiveBranches } from "@/lib/data/locations";
 import { Section } from "@/components/ui/section";
@@ -18,6 +19,24 @@ export default function VisitPage() {
   return (
     <>
       <Section eyebrow="Visit" title="Make a reservation">
+        {/* Ambiance Hero Banner */}
+        <div className="relative mb-8 aspect-[21/9] w-full overflow-hidden rounded-3xl border border-[var(--border)] shadow-lg">
+          <Image
+            src="/images/locations/restaurant-dining-vibe.jpg"
+            alt="Warm candlelit dining atmosphere at Mama Oliech"
+            fill
+            sizes="100vw"
+            priority
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+          <div className="absolute bottom-4 left-6 right-6">
+            <span className="inline-block rounded-full bg-amber-500/90 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-slate-950 shadow-md">
+              Warm Dining Atmosphere · Marcus Garvey Road
+            </span>
+          </div>
+        </div>
+
         <p className="type-lead">
           Call or WhatsApp the branch you plan to visit. For large groups, use
           the catering enquiry form so the kitchen can prepare.
@@ -55,14 +74,26 @@ export default function VisitPage() {
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
           {isLiveLink(EXTERNAL_LINKS.uberEats) ? (
-            <Button href={EXTERNAL_LINKS.uberEats} variant="secondary" external size="lg">
-              Uber Eats (flagship)
-            </Button>
+            <a
+              href={EXTERNAL_LINKS.uberEats}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-black text-white px-5 py-3 text-sm font-bold shadow-md hover:bg-stone-800 transition-all hover:scale-105"
+            >
+              <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
+              <span>Uber Eats (Flagship Store)</span>
+            </a>
           ) : null}
           {isLiveLink(EXTERNAL_LINKS.boltFood) ? (
-            <Button href={EXTERNAL_LINKS.boltFood} variant="secondary" external size="lg">
-              Bolt Food
-            </Button>
+            <a
+              href={EXTERNAL_LINKS.boltFood}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-emerald-600 text-white px-5 py-3 text-sm font-bold shadow-md hover:bg-emerald-500 transition-all hover:scale-105"
+            >
+              <span className="h-2.5 w-2.5 rounded-full bg-emerald-200" />
+              <span>Bolt Food</span>
+            </a>
           ) : null}
         </div>
         <ul className="mt-10 space-y-4">

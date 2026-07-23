@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { getActiveBranches } from "@/lib/data/locations";
 import { Button } from "@/components/ui/button";
 
@@ -54,12 +55,27 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="max-w-lg space-y-4">
-      {/* Honeypot — hidden from users */}
-      <div className="absolute -left-[9999px]" aria-hidden>
-        <label htmlFor="company">Company</label>
-        <input id="company" name="company" type="text" tabIndex={-1} autoComplete="off" />
+    <div className="rounded-3xl border border-[var(--border)] bg-white p-6 sm:p-8 shadow-sm">
+      <div className="relative mb-6 aspect-[21/8] w-full overflow-hidden rounded-2xl border border-[var(--border)]">
+        <Image
+          src="/images/locations/restaurant-dining-vibe.jpg"
+          alt="Mama Oliech Guest Hospitality"
+          fill
+          sizes="(max-width: 640px) 100vw, 500px"
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+        <span className="absolute bottom-3 left-4 text-xs font-bold text-white uppercase tracking-wider">
+          Direct Customer Service
+        </span>
       </div>
+
+      <form onSubmit={onSubmit} className="max-w-lg space-y-4">
+        {/* Honeypot — hidden from users */}
+        <div className="absolute -left-[9999px]" aria-hidden>
+          <label htmlFor="company">Company</label>
+          <input id="company" name="company" type="text" tabIndex={-1} autoComplete="off" />
+        </div>
 
       <Field label="Name" name="name" required />
       <Field label="Phone / WhatsApp" name="phone" type="tel" required />
@@ -108,6 +124,7 @@ export function ContactForm() {
         </p>
       ) : null}
     </form>
+    </div>
   );
 }
 

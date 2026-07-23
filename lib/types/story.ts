@@ -15,6 +15,7 @@ export interface CelebrityVisit {
   note?: string;
   relatedMenuItemId?: string;
   imageSrc?: string;
+  imageAlt?: string;
 }
 
 export interface HeritageFact {

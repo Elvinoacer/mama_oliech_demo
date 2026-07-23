@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Section } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
 import { Utensils, Calendar, PhoneCall, Sparkles } from "lucide-react";
+import { CTA_IMAGE } from "@/lib/data/unsplash";
 
 export function CtaSection() {
   return (
@@ -10,8 +11,8 @@ export function CtaSection() {
       {/* Background Image with Dark Gradient Overlay */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/images/food/hero-tilapia-feast.jpg"
-          alt="Mama Oliech Food Background"
+          src={CTA_IMAGE.src}
+          alt={CTA_IMAGE.alt}
           fill
           sizes="100vw"
           className="object-cover opacity-20 filter saturate-150"

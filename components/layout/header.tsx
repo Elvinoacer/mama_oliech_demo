@@ -1,10 +1,11 @@
 import Link from "next/link";
+import Image from "next/image";
 import { BRAND, NAV_LINKS } from "@/lib/constants";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { HeaderNavLink } from "@/components/layout/header-nav-link";
-import { Flame, ShoppingBag } from "lucide-react";
+import { ShoppingBag } from "lucide-react";
 
 export function Header() {
   return (
@@ -13,8 +14,14 @@ export function Header() {
         
         {/* Brand Logo */}
         <Link href="/" className="group flex items-center gap-3">
-          <div className="h-10 w-10 rounded-full bg-gradient-to-tr from-amber-600 to-amber-500 text-slate-950 flex items-center justify-center font-display font-bold text-lg shadow-lg shadow-amber-600/30 group-hover:scale-105 transition-transform">
-            <Flame className="h-5 w-5 fill-slate-950 text-slate-950" />
+          <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full shadow-lg shadow-amber-600/30 group-hover:scale-105 transition-transform">
+            <Image
+              src="/images/logo.svg"
+              alt={`${BRAND.name} Logo`}
+              fill
+              sizes="44px"
+              className="object-contain"
+            />
           </div>
           <div className="flex flex-col leading-tight">
             <span className="font-display text-xl sm:text-2xl font-bold tracking-tight text-white group-hover:text-amber-400 transition-colors">

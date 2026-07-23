@@ -4,6 +4,7 @@ import { getActiveBranches, getBranchBySlug } from "@/lib/data/locations";
 import { isLiveLink } from "@/lib/constants";
 import { Section } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -38,6 +39,18 @@ export default async function BranchPage({ params }: Props) {
 
   return (
     <Section eyebrow={branch.label ?? "Branch"} title={branch.name}>
+      {branch.imageSrc ? (
+        <div className="relative -mt-2 mb-8 aspect-[21/9] overflow-hidden rounded-2xl border border-[var(--border)] shadow-lg">
+          <Image
+            src={branch.imageSrc}
+            alt={`${branch.name} restaurant`}
+            fill
+            sizes="100vw"
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+        </div>
+      ) : null}
       <div className="max-w-xl space-y-8">
         <p className="type-lead !max-w-none">
           {branch.addressLine}

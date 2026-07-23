@@ -8,6 +8,7 @@
  */
 
 import type { Branch } from "@/lib/types/location";
+import { LOCATION_IMAGES } from "@/lib/data/unsplash";
 
 export const BRANCHES: Branch[] = [
   {
@@ -37,7 +38,7 @@ export const BRANCHES: Branch[] = [
     },
     menuPdfPath: undefined, // add public/menus/hurlingham.pdf when ready
     qrPath: "/table?branch=hurlingham",
-    imageSrc: undefined,
+    imageSrc: LOCATION_IMAGES.hurlingham.src,
     internalNotes:
       "Led by Lilian (founder's daughter). Highest brand recognition.",
   },
@@ -65,6 +66,7 @@ export const BRANCHES: Branch[] = [
         "https://www.ubereats.com/ke/store/mama-oliech-kiambu-road/wOPzpbfuW2euV0xGhQcydA",
     },
     qrPath: "/table?branch=kiambu-road",
+    imageSrc: LOCATION_IMAGES.kiambuRoad.src,
     internalNotes:
       "Ops note: pricing/menu may diverge from flagship — centralize later. Exact street number to confirm.",
   },

@@ -1,9 +1,14 @@
 /**
  * Static menu seed for marketing + QR portal.
- * Prices intentionally omitted on marketing surfaces (vary by branch/platform).
+ * Photos: Unsplash demo URLs via lib/data/unsplash.ts
  */
 
 import type { MenuCategory } from "@/lib/types/menu";
+import { MENU_IMAGES } from "@/lib/data/unsplash";
+
+function img(id: keyof typeof MENU_IMAGES, alt: string) {
+  return { imageSrc: MENU_IMAGES[id], imageAlt: alt };
+}
 
 export const MENU_CATEGORIES: MenuCategory[] = [
   {
@@ -20,6 +25,7 @@ export const MENU_CATEGORIES: MenuCategory[] = [
         badge: "Signature",
         isCatchWeight: true,
         station: "fry",
+        ...img("tilapia-fried", "Whole fried fish plated with sides"),
       },
       {
         id: "tilapia-wet-fry",
@@ -28,6 +34,7 @@ export const MENU_CATEGORIES: MenuCategory[] = [
           "Gently wet-fried in a rich tomato and onion sauce — comforting and saucy.",
         isCatchWeight: true,
         station: "fry",
+        ...img("tilapia-wet-fry", "Fish in tomato stew sauce"),
       },
       {
         id: "zuckerberg-special",
@@ -37,6 +44,7 @@ export const MENU_CATEGORIES: MenuCategory[] = [
         badge: "Celebrity favorite",
         isCatchWeight: true,
         station: "fry",
+        ...img("zuckerberg-special", "Premium plated whole fish"),
       },
     ],
   },
@@ -50,6 +58,7 @@ export const MENU_CATEGORIES: MenuCategory[] = [
         name: "Aliya",
         description: "Salted, sundried beef fried with tomatoes.",
         station: "pass",
+        ...img("aliya", "Sautéed beef dish"),
       },
       {
         id: "omena",
@@ -57,6 +66,7 @@ export const MENU_CATEGORIES: MenuCategory[] = [
         description:
           "Small dried lake fish — a classic Western Kenyan protein when available.",
         station: "pass",
+        ...img("omena", "Small fried lake fish"),
       },
     ],
   },
@@ -70,48 +80,56 @@ export const MENU_CATEGORIES: MenuCategory[] = [
         name: "Managu",
         description: "Leafy African nightshade greens, cooked traditional-style.",
         station: "starch-greens",
+        ...img("managu", "Fresh leafy greens"),
       },
       {
         id: "osuga",
         name: "Osuga (with cream)",
         description: "Bitter greens mellowed with cream — a house favorite.",
         station: "starch-greens",
+        ...img("osuga", "Creamy greens bowl"),
       },
       {
         id: "kunde",
         name: "Kunde",
         description: "Cowpea leaves — earthy and nourishing.",
         station: "starch-greens",
+        ...img("kunde", "Cooked traditional greens"),
       },
       {
         id: "mito",
         name: "Mito / Mitoo",
         description: "Traditional local greens, prepared simply.",
         station: "starch-greens",
+        ...img("mito", "Green vegetables"),
       },
       {
         id: "plantains",
         name: "Plantains",
         description: "Ripe plantains, a soft sweet side for fish plates.",
         station: "starch-greens",
+        ...img("plantains", "Cooked plantains"),
       },
       {
         id: "ugali",
         name: "Ugali (white or brown)",
         description: "Corn or millet ugali — guest’s choice.",
         station: "starch-greens",
+        ...img("ugali", "Maize meal staple"),
       },
       {
         id: "kachumbari",
         name: "Kachumbari",
         description: "Fresh tomato and onion salad.",
         station: "pass",
+        ...img("kachumbari", "Fresh tomato and onion salad"),
       },
       {
         id: "chips",
         name: "Chips",
         description: "Crisp potato chips — a popular side for mixed tables.",
         station: "starch-greens",
+        ...img("chips", "Crispy potato fries"),
       },
     ],
   },
@@ -126,12 +144,14 @@ export const MENU_CATEGORIES: MenuCategory[] = [
         name: "Group Menu 1 — Whole mbuzi package",
         description:
           "Whole goat with kachumbari, ugali, and samosas — ideal for about 10–12 guests.",
+        ...img("group-mbuzi", "Roast meat feast for a group"),
       },
       {
         id: "group-fish-pilau",
         name: "Group Menu 2 — Fish, pilau & more",
         description:
           "Large-format spread with fish, pilau, chapati, beef, and mixed vegetables — ideal for about 15 guests.",
+        ...img("group-fish-pilau", "Large banquet food spread"),
       },
     ],
   },
@@ -145,18 +165,21 @@ export const MENU_CATEGORIES: MenuCategory[] = [
         name: "Local beers",
         description: "Kenyan favorites on offer — ask for today’s selection.",
         station: "bar",
+        ...img("local-beers", "Glasses of beer"),
       },
       {
         id: "dawa",
         name: "Dawa cocktails",
         description: "The classic Kenyan vodka, honey, and lime cocktail.",
         station: "bar",
+        ...img("dawa", "Citrus cocktail"),
       },
       {
         id: "soft-drinks",
         name: "Soft drinks & water",
         description: "Sodas, juices, and bottled water.",
         station: "bar",
+        ...img("soft-drinks", "Fresh juice drink"),
       },
     ],
   },
