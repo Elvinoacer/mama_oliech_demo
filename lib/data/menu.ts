@@ -1,12 +1,6 @@
 /**
- * Static menu seed data for the marketing site + QR portal.
- * Source outline: docs/mama-oliech-website-content.md §3
- *
- * TODO:
- * - Confirm dish names / availability with kitchen leadership.
- * - Add real descriptions and food photography IDs.
- * - Keep prices OFF this file for marketing (or load from one verified source).
- * - Later: generate this from POS / aggregator so Uber/Bolt/in-store stay in sync.
+ * Static menu seed for marketing + QR portal.
+ * Prices intentionally omitted on marketing surfaces (vary by branch/platform).
  */
 
 import type { MenuCategory } from "@/lib/types/menu";
@@ -16,13 +10,13 @@ export const MENU_CATEGORIES: MenuCategory[] = [
     id: "fish",
     title: "Fish",
     intro:
-      "Whole Lake Victoria tilapia — fried crisp or wet-fry style — the house signature.",
+      "Whole Lake Victoria tilapia — the house signature. Sized in the kitchen; ask for today’s portions.",
     items: [
       {
         id: "tilapia-fried",
         name: "Whole Fried Tilapia",
         description:
-          "Deep-fried until crisp. Served with ugali, kachumbari, and greens.",
+          "Deep-fried until crisp. Served with ugali, kachumbari, and traditional greens.",
         badge: "Signature",
         isCatchWeight: true,
         station: "fry",
@@ -31,7 +25,7 @@ export const MENU_CATEGORIES: MenuCategory[] = [
         id: "tilapia-wet-fry",
         name: "Wet-Fry Tilapia (Stew Style)",
         description:
-          "Gently wet-fried in a rich tomato and onion sauce.",
+          "Gently wet-fried in a rich tomato and onion sauce — comforting and saucy.",
         isCatchWeight: true,
         station: "fry",
       },
@@ -39,7 +33,7 @@ export const MENU_CATEGORIES: MenuCategory[] = [
         id: "zuckerberg-special",
         name: "Zuckerberg Special",
         description:
-          "Premium whole tilapia — named for a memorable lunch guest.",
+          "Premium whole tilapia — named for a memorable lunch guest. Ask staff for today’s size.",
         badge: "Celebrity favorite",
         isCatchWeight: true,
         station: "fry",
@@ -49,6 +43,7 @@ export const MENU_CATEGORIES: MenuCategory[] = [
   {
     id: "heritage",
     title: "Heritage & Specialty Dishes",
+    intro: "Dishes that carry Luo and broader Kenyan home-cooking traditions.",
     items: [
       {
         id: "aliya",
@@ -56,24 +51,66 @@ export const MENU_CATEGORIES: MenuCategory[] = [
         description: "Salted, sundried beef fried with tomatoes.",
         station: "pass",
       },
-      // TODO: add more family recipes once approved for public menu
+      {
+        id: "omena",
+        name: "Omena",
+        description:
+          "Small dried lake fish — a classic Western Kenyan protein when available.",
+        station: "pass",
+      },
     ],
   },
   {
     id: "greens-sides",
     title: "Traditional Greens & Sides",
-    intro:
-      "Western Kenyan greens are part of the meal — not just garnish.",
+    intro: "Western Kenyan greens are part of the meal — not just garnish.",
     items: [
-      { id: "managu", name: "Managu", station: "starch-greens" },
-      { id: "osuga", name: "Osuga (with cream)", station: "starch-greens" },
-      { id: "kunde", name: "Kunde", station: "starch-greens" },
-      { id: "mito", name: "Mito / Mitoo", station: "starch-greens" },
-      { id: "plantains", name: "Plantains", station: "starch-greens" },
+      {
+        id: "managu",
+        name: "Managu",
+        description: "Leafy African nightshade greens, cooked traditional-style.",
+        station: "starch-greens",
+      },
+      {
+        id: "osuga",
+        name: "Osuga (with cream)",
+        description: "Bitter greens mellowed with cream — a house favorite.",
+        station: "starch-greens",
+      },
+      {
+        id: "kunde",
+        name: "Kunde",
+        description: "Cowpea leaves — earthy and nourishing.",
+        station: "starch-greens",
+      },
+      {
+        id: "mito",
+        name: "Mito / Mitoo",
+        description: "Traditional local greens, prepared simply.",
+        station: "starch-greens",
+      },
+      {
+        id: "plantains",
+        name: "Plantains",
+        description: "Ripe plantains, a soft sweet side for fish plates.",
+        station: "starch-greens",
+      },
       {
         id: "ugali",
         name: "Ugali (white or brown)",
-        description: "Corn or millet ugali — guest choice.",
+        description: "Corn or millet ugali — guest’s choice.",
+        station: "starch-greens",
+      },
+      {
+        id: "kachumbari",
+        name: "Kachumbari",
+        description: "Fresh tomato and onion salad.",
+        station: "pass",
+      },
+      {
+        id: "chips",
+        name: "Chips",
+        description: "Crisp potato chips — a popular side for mixed tables.",
         station: "starch-greens",
       },
     ],
@@ -82,34 +119,49 @@ export const MENU_CATEGORIES: MenuCategory[] = [
     id: "group-catering",
     title: "Group & Catering Menus",
     intro:
-      "Packages for 10–15+ guests. Enquire for custom events — do not hardcode stale package prices here.",
+      "Packages for celebrations and office lunches. Pricing on enquiry — menus vary by season and guest count.",
     items: [
       {
         id: "group-mbuzi",
         name: "Group Menu 1 — Whole mbuzi package",
         description:
-          "Whole goat with kachumbari, ugali, and samosas — ideal for ~10–12 guests.",
+          "Whole goat with kachumbari, ugali, and samosas — ideal for about 10–12 guests.",
       },
       {
         id: "group-fish-pilau",
         name: "Group Menu 2 — Fish, pilau & more",
         description:
-          "Large-format package with fish, pilau, chapati, beef, and mixed vegetables — ideal for ~15 guests.",
+          "Large-format spread with fish, pilau, chapati, beef, and mixed vegetables — ideal for about 15 guests.",
       },
     ],
   },
   {
     id: "drinks",
     title: "Drinks",
+    intro: "Local beers, house cocktails, and soft drinks. Full bar list available in house.",
     items: [
-      { id: "local-beers", name: "Local beers", station: "bar" },
-      { id: "dawa", name: "Dawa cocktails", station: "bar" },
-      // TODO: full bar list
+      {
+        id: "local-beers",
+        name: "Local beers",
+        description: "Kenyan favorites on offer — ask for today’s selection.",
+        station: "bar",
+      },
+      {
+        id: "dawa",
+        name: "Dawa cocktails",
+        description: "The classic Kenyan vodka, honey, and lime cocktail.",
+        station: "bar",
+      },
+      {
+        id: "soft-drinks",
+        name: "Soft drinks & water",
+        description: "Sodas, juices, and bottled water.",
+        station: "bar",
+      },
     ],
   },
 ];
 
-/** Helper for pages that need a single category */
 export function getCategory(id: MenuCategory["id"]) {
   return MENU_CATEGORIES.find((c) => c.id === id);
 }

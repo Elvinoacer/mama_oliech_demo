@@ -1,48 +1,57 @@
-/**
- * Marketing site header.
- *
- * TODO:
- * - Design: logo wordmark + warm brand palette.
- * - Sticky header on scroll; mobile drawer using MobileNav.
- * - Highlight active route with usePathname (client subcomponent).
- * - Optional: "Order delivery" CTA always visible on mobile.
- */
-
 import Link from "next/link";
 import { BRAND, NAV_LINKS } from "@/lib/constants";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
+import { MobileNav } from "@/components/layout/mobile-nav";
+import { HeaderNavLink } from "@/components/layout/header-nav-link";
+import { Flame, ShoppingBag } from "lucide-react";
 
 export function Header() {
   return (
-    <header className="border-b border-foreground/10">
-      <Container className="flex h-16 items-center justify-between gap-4">
-        <Link href="/" className="font-semibold tracking-tight">
-          {/* TODO: replace text with logo asset */}
-          {BRAND.shortName}
+    <header className="sticky top-0 z-50 border-b border-amber-900/40 bg-[#160c07]/95 text-amber-50 backdrop-blur-md shadow-xl transition-all">
+      <Container className="flex h-20 items-center justify-between gap-4">
+        
+        {/* Brand Logo */}
+        <Link href="/" className="group flex items-center gap-3">
+          <div className="h-10 w-10 rounded-full bg-gradient-to-tr from-amber-600 to-amber-500 text-slate-950 flex items-center justify-center font-display font-bold text-lg shadow-lg shadow-amber-600/30 group-hover:scale-105 transition-transform">
+            <Flame className="h-5 w-5 fill-slate-950 text-slate-950" />
+          </div>
+          <div className="flex flex-col leading-tight">
+            <span className="font-display text-xl sm:text-2xl font-bold tracking-tight text-white group-hover:text-amber-400 transition-colors">
+              {BRAND.shortName}
+            </span>
+            <span className="text-[11px] font-bold uppercase tracking-widest text-amber-400/90 hidden sm:block">
+              Authentic Lake Victoria Tilapia
+            </span>
+          </div>
         </Link>
 
-        <nav className="hidden items-center gap-6 text-sm md:flex" aria-label="Main">
+        {/* Navigation */}
+        <nav
+          className="hidden items-center gap-1 text-base md:flex"
+          aria-label="Main"
+        >
           {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="opacity-80 transition hover:opacity-100"
-            >
-              {link.label}
-            </Link>
+            <HeaderNavLink key={link.href} href={link.href} label={link.label} />
           ))}
         </nav>
 
-        <div className="flex items-center gap-2">
-          {/* TODO: wire to real delivery aggregator or /visit#delivery */}
-          <Button href="/visit" variant="primary" className="hidden sm:inline-flex">
-            Order / Visit
+        {/* Call to action */}
+        <div className="flex items-center gap-3">
+          <Button
+            href="/visit"
+            variant="primary"
+            className="hidden sm:inline-flex bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-bold hover:from-amber-400 hover:to-amber-500 shadow-md shadow-amber-600/30 border-none transition-all duration-300"
+          >
+            <ShoppingBag className="h-4 w-4" />
+            <span>Order / Visit</span>
           </Button>
-          {/* TODO: <MobileNav /> for small screens */}
-          <span className="text-xs opacity-50 md:hidden">Menu TODO</span>
+          <MobileNav />
         </div>
+
       </Container>
     </header>
   );
 }
+
+

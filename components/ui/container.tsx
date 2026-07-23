@@ -1,8 +1,3 @@
-/**
- * Page width constraint.
- * TODO: align max-width with final design system (marketing vs QR mobile).
- */
-
 import { cn } from "@/lib/utils/cn";
 
 export function Container({

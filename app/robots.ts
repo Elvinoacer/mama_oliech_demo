@@ -1,17 +1,14 @@
-/**
- * robots.txt generation.
- * TODO: disallow /staff and /api from indexing; set production host.
- */
-
 import type { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
+  const base = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+
   return {
     rules: {
       userAgent: "*",
       allow: "/",
-      // TODO: disallow: ["/staff/", "/api/"],
+      disallow: ["/staff/", "/api/"],
     },
-    // TODO: sitemap: "https://www.example.com/sitemap.xml",
+    sitemap: `${base}/sitemap.xml`,
   };
 }

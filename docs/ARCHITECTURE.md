@@ -141,3 +141,13 @@ Route groups like `(marketing)` organize layouts without changing URLs (`/about`
 - Production design system
 
 When you implement a file, replace the `TODO` comments and remove skeleton placeholders.
+
+---
+
+## Task tracker
+
+For small, ordered work items (with **files affected** per task), use:
+
+→ **[`docs/IMPLEMENTATION_BACKLOG.md`](./IMPLEMENTATION_BACKLOG.md)**
+
+Mark tasks `[x]` as you go. Prefer finishing Phases 0–3 before QR polish, forms, and integrations.

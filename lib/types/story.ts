@@ -1,11 +1,5 @@
 /**
  * Brand story / heritage content types.
- * Source: website content doc §2 and ops doc heritage portal sections.
- *
- * TODO:
- * - Replace placeholder copy with approved family narrative.
- * - Add real photo assets + alt text for accessibility and SEO.
- * - Optional: short anecdotes per celebrity visit if documented.
  */
 
 export interface PersonProfile {
@@ -19,8 +13,8 @@ export interface CelebrityVisit {
   name: string;
   title?: string;
   note?: string;
-  /** Link to order "their" meal if productized later */
   relatedMenuItemId?: string;
+  imageSrc?: string;
 }
 
 export interface HeritageFact {

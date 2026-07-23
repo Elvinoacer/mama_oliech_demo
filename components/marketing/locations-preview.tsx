@@ -1,9 +1,3 @@
-/**
- * Homepage strip of active branches only.
- *
- * TODO: map embed or photo per branch; live hours from lib/data.
- */
-
 import { getActiveBranches } from "@/lib/data/locations";
 import { Section } from "@/components/ui/section";
 import { LocationCard } from "@/components/locations/location-card";
@@ -19,7 +13,7 @@ export function LocationsPreview() {
           <LocationCard key={branch.slug} branch={branch} />
         ))}
       </div>
-      <div className="mt-6">
+      <div className="mt-8">
         <Button href="/locations" variant="secondary">
           All locations
         </Button>

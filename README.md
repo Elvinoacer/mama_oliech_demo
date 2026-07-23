@@ -11,6 +11,7 @@ Next.js 16 skeleton for Mama Oliech’s public website, table QR heritage portal
 | [`docs/mama-oliech-website-content.md`](./docs/mama-oliech-website-content.md) | Marketing copy structure |
 | [`docs/mama_oliech_more_info.md`](./docs/mama_oliech_more_info.md) | Ops / digital transformation blueprint |
 | [`docs/ARCHITECTURE.md`](./docs/ARCHITECTURE.md) | How this repo is organized |
+| [`docs/IMPLEMENTATION_BACKLOG.md`](./docs/IMPLEMENTATION_BACKLOG.md) | **Step-by-step tasks** (small tickets + files per task) |
 
 ## Quick start
 
