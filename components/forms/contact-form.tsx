@@ -58,7 +58,7 @@ export function ContactForm() {
     <div className="rounded-3xl border border-[var(--border)] bg-white p-6 sm:p-8 shadow-sm">
       <div className="relative mb-6 aspect-[21/8] w-full overflow-hidden rounded-2xl border border-[var(--border)]">
         <Image
-          src="/images/locations/restaurant-dining-vibe.jpg"
+          src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=900&q=80"
           alt="Mama Oliech Guest Hospitality"
           fill
           sizes="(max-width: 640px) 100vw, 500px"

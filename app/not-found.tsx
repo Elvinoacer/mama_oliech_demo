@@ -7,7 +7,7 @@ export default function NotFound() {
     <main className="mx-auto flex min-h-[65vh] max-w-xl flex-col items-center justify-center text-center px-6 py-20">
       <div className="relative mb-6 h-36 w-36 overflow-hidden rounded-full border-4 border-amber-500/30 shadow-xl">
         <Image
-          src="/images/food/hero-tilapia-feast.jpg"
+          src="https://images.unsplash.com/photo-1580476262798-bddd9f4b7369?auto=format&fit=crop&w=900&q=80"
           alt="Mama Oliech 404 Fish"
           fill
           sizes="144px"

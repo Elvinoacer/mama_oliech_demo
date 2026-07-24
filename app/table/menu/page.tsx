@@ -3,10 +3,13 @@ import { MenuCategory } from "@/components/menu/menu-category";
 
 export default function TableMenuPage() {
   return (
-    <div className="space-y-12">
+    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
       <div>
-        <h1 className="type-page-title !text-[length:var(--step-4)]">Menu</h1>
-        <p className="type-lead mt-2 !max-w-none">
+        <h1 className="font-display text-4xl font-bold tracking-tight text-white mb-2">
+          Menu
+        </h1>
+        <div className="h-1 w-20 bg-amber-500 rounded-full"></div>
+        <p className="text-white/80 text-lg leading-relaxed mt-4 max-w-lg">
           Ask your waiter for today&apos;s fish sizes and prices.
         </p>
       </div>

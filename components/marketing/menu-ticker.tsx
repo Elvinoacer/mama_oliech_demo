@@ -18,7 +18,7 @@ const POPULAR_ITEMS: MenuItemCard[] = [
     category: "Catch of the Day",
     badge: "Most Popular",
     desc: "Crispy fried whole fish with salt & pepper crust, white ugali, kachumbari & greens.",
-    image: "/images/food/hero-tilapia-feast.jpg",
+    image: "https://images.unsplash.com/photo-1580476262798-bddd9f4b7369?auto=format&fit=crop&w=900&q=80",
     tag: "Fresh Daily",
   },
   {
@@ -26,7 +26,7 @@ const POPULAR_ITEMS: MenuItemCard[] = [
     category: "Kitchen Specialty",
     badge: "Chef's Choice",
     desc: "Simmered in rich red vine-ripe tomato, onion & coriander reduction gravy.",
-    image: "/images/food/tilapia-wet-fry.jpg",
+    image: "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=900&q=80",
     tag: "Saucy & Rich",
   },
   {
@@ -34,7 +34,7 @@ const POPULAR_ITEMS: MenuItemCard[] = [
     category: "Indigenous Side",
     badge: "Heritage Recipe",
     desc: "Bitter African nightshade & Osuga mellowed with rich country cream.",
-    image: "/images/food/traditional-greens-ugali.jpg",
+    image: "https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?auto=format&fit=crop&w=900&q=80",
     tag: "Nutrient-Packed",
   },
   {
@@ -42,7 +42,7 @@ const POPULAR_ITEMS: MenuItemCard[] = [
     category: "Luo Heritage",
     badge: "Traditional",
     desc: "Cured sun-dried beef pan-seared with sweet onions and red tomatoes.",
-    image: "/images/food/heritage-beef-aliya.jpg",
+    image: "https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?auto=format&fit=crop&w=900&q=80",
     tag: "Savory Delight",
   },
   {
@@ -50,7 +50,7 @@ const POPULAR_ITEMS: MenuItemCard[] = [
     category: "Craft Drinks",
     badge: "Bar Favorite",
     desc: "Vodka, fresh lime wheels, honey stick stirrer, and crushed ice.",
-    image: "/images/food/dawa-cocktail.jpg",
+    image: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=900&q=80",
     tag: "Refreshing",
   },
 ];
@@ -125,7 +125,7 @@ export function MenuTicker() {
         {/* Bonus CTA card in the grid */}
         <div className="relative overflow-hidden flex flex-col justify-center items-center text-center p-8 rounded-3xl bg-gradient-to-br from-[#25150d] to-[#120905] text-white border border-amber-900/40 shadow-xl space-y-4 group">
           <Image
-            src="/images/food/hero-tilapia-feast.jpg"
+            src="https://images.unsplash.com/photo-1580476262798-bddd9f4b7369?auto=format&fit=crop&w=900&q=80"
             alt="Mama Oliech Menu Background"
             fill
             sizes="(max-width: 1024px) 100vw, 33vw"

@@ -14,7 +14,7 @@ function u(photoId: string, extra = "") {
 /** Menu food photography by dish id */
 export const MENU_IMAGES = {
   // Fish
-  "tilapia-fried": u("photo-1519708227418-c8fd9a32b7a2"), // whole fried fish
+  "tilapia-fried": u("photo-1580476262798-bddd9f4b7369"), // whole fried fish
   "tilapia-wet-fry": u("photo-1559339352-11d035aa65de"), // saucy fish dish
   "zuckerberg-special": u("photo-1467003909585-2f8a72700288"), // premium plated fish
   // Heritage / beef & lake protein
@@ -126,7 +126,7 @@ export const CATERING_HERO_IMAGE = {
 /** Menu Category Banners by Category ID */
 export const CATEGORY_IMAGES: Record<string, { src: string; alt: string }> = {
   fish: {
-    src: u("photo-1519708227418-c8fd9a32b7a2"),
+    src: u("photo-1580476262798-bddd9f4b7369"),
     alt: "Fresh Lake Victoria Fish Category",
   },
   heritage: {
@@ -150,7 +150,7 @@ export const CATEGORY_IMAGES: Record<string, { src: string; alt: string }> = {
 /** Food Guide / Cultural Facts thumbnails by fact id */
 export const FOOD_GUIDE_IMAGES: Record<string, { src: string; alt: string }> = {
   "lake-victoria": {
-    src: u("photo-1519708227418-c8fd9a32b7a2"),
+    src: u("photo-1580476262798-bddd9f4b7369"),
     alt: "Whole Tilapia Fish",
   },
   ugali: {

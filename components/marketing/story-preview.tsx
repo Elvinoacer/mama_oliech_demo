@@ -12,7 +12,7 @@ export function StoryPreview() {
       {/* ── Full-width cinematic image banner ── */}
       <div className="relative w-full h-[50vh] min-h-[360px] max-h-[520px]">
         <Image
-          src="/images/locations/restaurant-dining-vibe.jpg"
+          src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=900&q=80"
           alt="The warm, candlelit dining room at Mama Oliech Restaurant"
           fill
           sizes="100vw"

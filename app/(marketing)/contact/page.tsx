@@ -26,7 +26,7 @@ export default function ContactPage() {
           {/* Restaurant Atmosphere Image Card */}
           <div className="relative aspect-[16/9] w-full overflow-hidden rounded-3xl border border-[var(--border)] shadow-md">
             <Image
-              src="/images/locations/restaurant-dining-vibe.jpg"
+              src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=900&q=80"
               alt="Mama Oliech Dining Atmosphere"
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"

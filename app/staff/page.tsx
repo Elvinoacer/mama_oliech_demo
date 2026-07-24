@@ -3,8 +3,8 @@ import Image from "next/image";
 import { TRAINING_MODULES } from "@/lib/data/training";
 
 const MODULE_IMAGES: Record<string, string> = {
-  founders: "/images/locations/restaurant-dining-vibe.jpg",
-  "menu-mastery": "/images/food/hero-tilapia-feast.jpg",
+  founders: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=900&q=80",
+  "menu-mastery": "https://images.unsplash.com/photo-1580476262798-bddd9f4b7369?auto=format&fit=crop&w=900&q=80",
   hospitality: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=500&q=80",
   "digital-tools": "https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=500&q=80",
 };
@@ -25,7 +25,7 @@ export default function StaffHomePage() {
             >
               <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-xl bg-stone-100 border border-[var(--border)]">
                 <Image
-                  src={MODULE_IMAGES[m.slug] ?? "/images/food/hero-tilapia-feast.jpg"}
+                  src={MODULE_IMAGES[m.slug] ?? "https://images.unsplash.com/photo-1580476262798-bddd9f4b7369?auto=format&fit=crop&w=900&q=80"}
                   alt={m.title}
                   fill
                   sizes="80px"

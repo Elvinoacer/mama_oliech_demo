@@ -24,7 +24,7 @@ const FEATURED_DISHES: DishItem[] = [
     description:
       "Lake Victoria whole tilapia deep-fried in sizzling oil until golden and crispy on the outside, moist and tender on the inside. Served with steaming ugali, fresh kachumbari, and indigenous greens.",
     pairings: ["White or Brown Millet Ugali", "Spicy Kachumbari", "Sautéed Managu"],
-    image: "/images/food/hero-tilapia-feast.jpg",
+    image: "https://images.unsplash.com/photo-1580476262798-bddd9f4b7369?auto=format&fit=crop&w=900&q=80",
     highlight: "Sized fresh in kitchen daily · Catch-weight",
   },
   {
@@ -34,7 +34,7 @@ const FEATURED_DISHES: DishItem[] = [
     description:
       "Gently deep-fried whole fish simmered in a fragrant, thick tomato, onion, sweet pepper, garlic & coriander gravy. Rich, comforting, and packed with Western Kenyan home flavors.",
     pairings: ["Warm Corn Ugali", "Osuga with Cream", "Cold Local Lager"],
-    image: "/images/food/tilapia-wet-fry.jpg",
+    image: "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=900&q=80",
     highlight: "Simmered to order in tomato reduction",
   },
   {
@@ -44,7 +44,7 @@ const FEATURED_DISHES: DishItem[] = [
     description:
       "Authentic Western Kenyan greens cooked with heritage techniques: bitter Osuga mellowed with rich cream, dark Managu, Kunde, and Mitoo served alongside soft brown millet or corn ugali.",
     pairings: ["Creamy Osuga", "Nightshade Managu", "Cowpea Kunde"],
-    image: "/images/food/traditional-greens-ugali.jpg",
+    image: "https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?auto=format&fit=crop&w=900&q=80",
     highlight: "Sourced directly from local farmers",
   },
   {
@@ -54,7 +54,7 @@ const FEATURED_DISHES: DishItem[] = [
     description:
       "Traditional Luo delicacy: salt-cured and sun-dried beef strips pan-fried with caramelized onions and vine-ripened tomatoes until deeply savory and tender.",
     pairings: ["Hot Ugali", "Fresh Chili Slaw", "Dawa Cocktail"],
-    image: "/images/food/heritage-beef-aliya.jpg",
+    image: "https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?auto=format&fit=crop&w=900&q=80",
     highlight: "Heritage curing technique passed down generations",
   },
   {
@@ -64,7 +64,7 @@ const FEATURED_DISHES: DishItem[] = [
     description:
       "The classic Kenyan Dawa cocktail made with premium vodka, fresh lime wedges, honey stick, and crushed ice, alongside fresh passionfruit juices and ice-cold local beers.",
     pairings: ["Tusker Lager", "Fresh Passion Juice", "Ginger Dawa"],
-    image: "/images/food/dawa-cocktail.jpg",
+    image: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=900&q=80",
     highlight: "Hand-muddled with natural honey & fresh lime",
   },
 ];

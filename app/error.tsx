@@ -19,7 +19,7 @@ export default function Error({
     <main className="mx-auto flex min-h-[60vh] max-w-lg flex-col items-center justify-center text-center px-6 py-20">
       <div className="relative mb-6 h-28 w-28 overflow-hidden rounded-full border-2 border-amber-500/40 shadow-lg">
         <Image
-          src="/images/food/tilapia-wet-fry.jpg"
+          src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=900&q=80"
           alt="Kitchen Error"
           fill
           sizes="112px"

@@ -22,7 +22,7 @@ export default function VisitPage() {
         {/* Ambiance Hero Banner */}
         <div className="relative mb-8 aspect-[21/9] w-full overflow-hidden rounded-3xl border border-[var(--border)] shadow-lg">
           <Image
-            src="/images/locations/restaurant-dining-vibe.jpg"
+            src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=900&q=80"
             alt="Warm candlelit dining atmosphere at Mama Oliech"
             fill
             sizes="100vw"

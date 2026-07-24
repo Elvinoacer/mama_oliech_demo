@@ -119,7 +119,7 @@ export function Hero() {
               {/* Main Image Container */}
               <div className="relative aspect-[4/3] sm:aspect-[16/11] lg:aspect-[4/3] rounded-3xl overflow-hidden border-2 border-amber-500/30 shadow-2xl shadow-black/80">
                 <Image
-                  src="/images/food/hero-tilapia-feast.jpg"
+                  src="https://images.unsplash.com/photo-1580476262798-bddd9f4b7369?auto=format&fit=crop&w=900&q=80"
                   alt="Authentic Lake Victoria Whole Fried Tilapia Feast at Mama Oliech"
                   fill
                   priority
