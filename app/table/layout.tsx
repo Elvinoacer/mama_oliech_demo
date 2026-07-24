@@ -41,8 +41,8 @@ export default function TablePortalLayout({
           {children}
         </main>
         
-        {/* Fixed Glass Bottom Nav / Desktop Dock */}
-        <div className="fixed bottom-0 left-0 right-0 z-50 flex justify-center pb-6 md:pb-8 pt-4 px-4 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/80 to-transparent pointer-events-none">
+        {/* Fixed Glass Bottom Nav / Desktop Dock (below pay modal z-[100]) */}
+        <div className="fixed bottom-0 left-0 right-0 z-40 flex justify-center pb-[max(1.25rem,env(safe-area-inset-bottom))] md:pb-8 pt-4 px-4 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/80 to-transparent pointer-events-none">
           <div className="pointer-events-auto w-full max-w-md md:max-w-fit">
             <HeritageNav />
           </div>

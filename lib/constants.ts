@@ -54,8 +54,17 @@ export function isLiveLink(href: string | undefined | null): href is string {
   return Boolean(href && href !== "#" && href.trim().length > 0);
 }
 
+/**
+ * Feature flags.
+ *
+ * enableMpesaStk is env-driven so sandbox/production can toggle without a code
+ * edit (see plan Task 7). Other flags stay hardcoded until their integrations land.
+ *
+ *   MPESA_ENABLED=true  in .env.local  → live Daraja client
+ *   unset / anything else              → safe demo response from initiateStkPush
+ */
 export const FEATURES = {
-  enableMpesaStk: false,
+  enableMpesaStk: process.env.MPESA_ENABLED === "true",
   enableEtims: false,
   enableDeliveryAggregator: false,
   enableStaffPortal: true,

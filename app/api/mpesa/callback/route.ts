@@ -1,12 +1,13 @@
 /**
  * POST /api/mpesa/callback
- * Safaricom Daraja result notification URL.
+ * Safaricom Daraja STK result notification URL.
  *
- * TODO:
- * - Whitelist Safaricom IPs or validate payload integrity as per Daraja docs.
- * - Map CheckoutRequestID → open bill; mark paid.
- * - On success, call submitFiscalInvoice (eTIMS) and kitchen/receipt print job.
- * - Respond quickly with expected Daraja ACK shape.
+ * Must be publicly reachable (ngrok / production domain).
+ * Keep this handler thin — parsing lives in lib/integrations/mpesa.ts.
+ *
+ * TODO (later):
+ * - Optional Safaricom IP allowlist
+ * - Map CheckoutRequestID → open bill once persistence exists
  */
 
 import { NextResponse } from "next/server";
@@ -20,8 +21,21 @@ export async function POST(request: Request) {
     return NextResponse.json({ ResultCode: 1, ResultDesc: "Invalid body" });
   }
 
-  await handleStkCallback(payload);
-
-  // TODO: return provider-specific success envelope
-  return NextResponse.json({ ResultCode: 0, ResultDesc: "Accepted (stub)" });
+  try {
+    const result = await handleStkCallback(payload);
+    // Daraja expects a quick 200 ACK; ResultCode 0 = we accepted the notification
+    return NextResponse.json({
+      ResultCode: 0,
+      ResultDesc: result.ok
+        ? "Accepted"
+        : "Accepted (payment not successful or incomplete payload)",
+    });
+  } catch (err) {
+    console.error("[api/mpesa/callback]", err);
+    // Still ACK so Safaricom does not hammer retries for app bugs
+    return NextResponse.json({
+      ResultCode: 0,
+      ResultDesc: "Accepted with processing error (logged)",
+    });
+  }
 }
