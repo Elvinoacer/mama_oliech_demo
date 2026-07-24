@@ -4,7 +4,11 @@ import { useState } from "react";
 import Image from "next/image";
 import { CreditCard } from "lucide-react";
 import type { MenuItem } from "@/lib/types/menu";
-import { ItemPayModal } from "@/components/qr/item-pay-modal";
+import {
+  ItemPayModal,
+  type PayBranchOption,
+  type PayModalSource,
+} from "@/components/qr/item-pay-modal";
 import { cn } from "@/lib/utils/cn";
 
 function formatKes(n: number) {
@@ -12,25 +16,32 @@ function formatKes(n: number) {
 }
 
 /**
- * @param showPrices — table QR portal can show reference prices; marketing pages leave off.
- * @param enablePay — table QR: show Pay on each card and open confirmation → M-Pesa modal.
+ * @param showPrices — show reference prices (table QR + payable marketing menu).
+ * @param enablePay — show Pay on each card and open confirmation → M-Pesa modal.
+ * @param paySource — `table` (in-house QR) vs `menu` (public marketing page).
+ * @param branches — active branches for public-menu branch picker.
  */
 export function MenuItemCard({
   item,
   showPrices = false,
   enablePay = false,
   branchSlug = "hurlingham",
+  paySource = "table",
+  branches,
 }: {
   item: MenuItem;
   showPrices?: boolean;
   enablePay?: boolean;
   branchSlug?: string;
+  paySource?: PayModalSource;
+  branches?: PayBranchOption[];
 }) {
   const [payOpen, setPayOpen] = useState(false);
   const isCw = item.pricingMode === "catch-weight" || item.isCatchWeight;
   const isEnquiry = item.pricingMode === "enquiry" || item.payable === false;
   const canPay =
     enablePay && item.payable !== false && item.available !== false && !isEnquiry;
+  const isPublicMenu = paySource === "menu";
 
   return (
     <>
@@ -119,12 +130,23 @@ export function MenuItemCard({
               onClick={() => setPayOpen(true)}
               className={cn(
                 "mt-4 flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3",
-                "text-sm font-bold text-slate-950 sm:mt-5 sm:text-[0.95rem]",
-                "bg-gradient-to-r from-amber-500 to-amber-600",
-                "shadow-md shadow-amber-900/10 transition",
-                "hover:from-amber-400 hover:to-amber-500 hover:shadow-amber-500/20",
-                "active:scale-[0.99] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400",
-                "min-h-[2.75rem]",
+                "text-sm font-bold sm:mt-5 sm:text-[0.95rem]",
+                "min-h-[2.75rem] shadow-md transition active:scale-[0.99]",
+                "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2",
+                isPublicMenu
+                  ? [
+                      "bg-[var(--brand-primary)] text-[var(--surface)]",
+                      "hover:bg-[var(--brand-primary-hover)]",
+                      "shadow-[var(--brand-primary)]/15",
+                      "focus-visible:outline-[var(--brand-primary)]",
+                    ]
+                  : [
+                      "text-slate-950",
+                      "bg-gradient-to-r from-amber-500 to-amber-600",
+                      "shadow-amber-900/10",
+                      "hover:from-amber-400 hover:to-amber-500 hover:shadow-amber-500/20",
+                      "focus-visible:outline-amber-400",
+                    ],
               )}
             >
               <CreditCard className="h-4 w-4 shrink-0" />
@@ -140,12 +162,14 @@ export function MenuItemCard({
         </div>
       </article>
 
-      {canPay ? (
+      {canPay && payOpen ? (
         <ItemPayModal
           item={item}
           open={payOpen}
           onClose={() => setPayOpen(false)}
           branchSlug={branchSlug}
+          source={paySource}
+          branches={branches}
         />
       ) : null}
     </>

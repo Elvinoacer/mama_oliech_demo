@@ -1,5 +1,9 @@
 import Image from "next/image";
 import type { MenuCategory as MenuCategoryType } from "@/lib/types/menu";
+import type {
+  PayBranchOption,
+  PayModalSource,
+} from "@/components/qr/item-pay-modal";
 import { CATEGORY_IMAGES } from "@/lib/data/unsplash";
 import { MenuItemCard } from "./menu-item-card";
 
@@ -8,13 +12,19 @@ export function MenuCategory({
   showPrices = false,
   enablePay = false,
   branchSlug = "hurlingham",
+  paySource = "table",
+  branches,
 }: {
   category: MenuCategoryType;
-  /** Table QR can show reference prices; marketing pages keep them off. */
+  /** Show reference prices on cards. */
   showPrices?: boolean;
-  /** Table QR: Pay with M-Pesa on each card. */
+  /** Pay with M-Pesa on each payable card. */
   enablePay?: boolean;
   branchSlug?: string;
+  /** `table` QR portal vs public marketing `menu`. */
+  paySource?: PayModalSource;
+  /** Active branches for public-menu branch picker. */
+  branches?: PayBranchOption[];
 }) {
   const categoryImg = CATEGORY_IMAGES[category.id];
 
@@ -58,6 +68,8 @@ export function MenuCategory({
               showPrices={showPrices}
               enablePay={enablePay}
               branchSlug={branchSlug}
+              paySource={paySource}
+              branches={branches}
             />
           </li>
         ))}

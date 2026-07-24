@@ -4,8 +4,10 @@
 **server-computed** total. Free-form amount STK remains staff-only for
 edge cases.
 
-There is no marketing-site cart. Table QR (`/table/menu`) pays **per menu card**:
-configure portion → confirm amount → M-Pesa phone → STK.
+There is no multi-item cart. Both **table QR** (`/table/menu`) and the public
+**marketing menu** (`/menu`) pay **per menu card**: configure portion → confirm
+amount → M-Pesa phone → STK. Public menu adds a branch picker and a name/order
+note instead of a table number.
 
 ## Architecture
 

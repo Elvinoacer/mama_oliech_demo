@@ -78,25 +78,43 @@ function stepIndex(step: Step) {
   return STEPS.findIndex((s) => s.id === step);
 }
 
+export type PayModalSource = "table" | "menu";
+
+export type PayBranchOption = {
+  slug: string;
+  label: string;
+};
+
 export function ItemPayModal({
   item,
   open,
   onClose,
   branchSlug = "hurlingham",
   defaultTable = "Table 5",
+  /** table QR vs public marketing menu — copy & defaults */
+  source = "table",
+  /** When provided (public menu), guest can pick branch */
+  branches,
 }: {
   item: MenuItem;
   open: boolean;
   onClose: () => void;
   branchSlug?: string;
   defaultTable?: string;
+  source?: PayModalSource;
+  branches?: PayBranchOption[];
 }) {
   const titleId = useId();
   const panelRef = useRef<HTMLDivElement>(null);
   const catchWeight = isCatchWeight(item);
+  const isPublicMenu = source === "menu";
+  const defaultRef = isPublicMenu ? "Pickup" : defaultTable;
 
+  // Fresh state on each mount — parent should remount when reopening
+  // (see MenuItemCard: render modal only while open).
   const [step, setStep] = useState<Step>("configure");
-  const [table, setTable] = useState(defaultTable);
+  const [table, setTable] = useState(defaultRef);
+  const [selectedBranch, setSelectedBranch] = useState(branchSlug);
   const [quantity, setQuantity] = useState(1);
   const [weightKg, setWeightKg] = useState(item.defaultWeightKg ?? 0.9);
   const [portionTierId, setPortionTierId] = useState<string | undefined>();
@@ -108,23 +126,6 @@ export function ItemPayModal({
   const [bill, setBill] = useState<PublicBill | null>(null);
   const [resultOk, setResultOk] = useState(false);
   const [resultMessage, setResultMessage] = useState("");
-
-  useEffect(() => {
-    if (!open) return;
-    setStep("configure");
-    setTable(defaultTable);
-    setQuantity(1);
-    setWeightKg(item.defaultWeightKg ?? 0.9);
-    setPortionTierId(undefined);
-    setPortionLabel(undefined);
-    setPhone("");
-    setConfirmed(false);
-    setLoading(false);
-    setError(null);
-    setBill(null);
-    setResultOk(false);
-    setResultMessage("");
-  }, [open, item, defaultTable]);
 
   // Body scroll lock + Escape + focus panel
   useEffect(() => {
@@ -165,7 +166,15 @@ export function ItemPayModal({
   const goConfirm = () => {
     setError(null);
     if (!table.trim()) {
-      setError("Enter your table number so staff can match the payment.");
+      setError(
+        isPublicMenu
+          ? "Enter a name or order note so staff can match the payment."
+          : "Enter your table number so staff can match the payment.",
+      );
+      return;
+    }
+    if (branches?.length && !selectedBranch) {
+      setError("Select a branch.");
       return;
     }
     if (catchWeight) {
@@ -201,7 +210,7 @@ export function ItemPayModal({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           tableLabel: table.trim(),
-          branchSlug,
+          branchSlug: selectedBranch || branchSlug,
           lines: [line],
         }),
       });
@@ -461,13 +470,46 @@ export function ItemPayModal({
 
           {step === "configure" ? (
             <div className="space-y-5">
-              <Field label="Table / seat" htmlFor="pay-table">
+              {branches && branches.length > 0 ? (
+                <div>
+                  <p className="mb-1.5 text-xs font-bold uppercase tracking-wider text-white/55">
+                    Branch
+                  </p>
+                  <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                    {branches.map((b) => {
+                      const selected = selectedBranch === b.slug;
+                      return (
+                        <button
+                          key={b.slug}
+                          type="button"
+                          onClick={() => setSelectedBranch(b.slug)}
+                          className={cn(
+                            "rounded-xl border px-3 py-2.5 text-left text-sm font-semibold transition",
+                            selected
+                              ? "border-amber-500 bg-amber-500/15 text-amber-100 ring-1 ring-amber-500/40"
+                              : "border-white/12 bg-white/[0.04] text-white/80 hover:border-white/25",
+                          )}
+                        >
+                          {b.label}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              ) : null}
+
+              <Field
+                label={isPublicMenu ? "Name / order note" : "Table / seat"}
+                htmlFor="pay-table"
+              >
                 <input
                   id="pay-table"
                   type="text"
                   value={table}
                   onChange={(e) => setTable(e.target.value)}
-                  placeholder="e.g. Table 5"
+                  placeholder={
+                    isPublicMenu ? "e.g. Jane · pickup" : "e.g. Table 5"
+                  }
                   autoComplete="off"
                   className={inputClass}
                 />
@@ -522,8 +564,10 @@ export function ItemPayModal({
                     />
                   </Field>
                   <p className="text-xs leading-relaxed text-white/45">
-                    Fish is billed by kitchen weight. Ask your waiter if you&apos;re
-                    unsure of today&apos;s size.
+                    Fish is billed by kitchen weight.
+                    {isPublicMenu
+                      ? " Confirm size with the branch if you're unsure."
+                      : " Ask your waiter if you're unsure of today's size."}
                   </p>
                 </div>
               ) : (
@@ -574,7 +618,19 @@ export function ItemPayModal({
                 </p>
                 <dl className="mt-3 space-y-3 text-sm">
                   <Row label="Item" value={lineSummary} />
-                  <Row label="Table" value={table.trim()} />
+                  {branches && branches.length > 0 ? (
+                    <Row
+                      label="Branch"
+                      value={
+                        branches.find((b) => b.slug === selectedBranch)?.label ??
+                        selectedBranch
+                      }
+                    />
+                  ) : null}
+                  <Row
+                    label={isPublicMenu ? "Name / note" : "Table"}
+                    value={table.trim()}
+                  />
                   <Row
                     label={catchWeight ? "Rate" : "Unit price"}
                     value={
@@ -605,7 +661,8 @@ export function ItemPayModal({
                 <span className="text-sm leading-relaxed text-white/85">
                   I confirm this item, portion, and amount. An M-Pesa PIN prompt
                   will be sent for{" "}
-                  <strong className="text-amber-300">{formatKes(draftTotal)}</strong>.
+                  <strong className="text-amber-300">{formatKes(draftTotal)}</strong>
+                  {isPublicMenu ? " for pickup or collection." : "."}
                 </span>
               </label>
 
