@@ -1,28 +1,40 @@
 "use client";
 
 import { useEffect, useId, useState } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { BRAND, NAV_LINKS } from "@/lib/constants";
 import { cn } from "@/lib/utils/cn";
+import { ShoppingBag, ChevronRight, X, Menu } from "lucide-react";
 
 export function MobileNav() {
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
   const panelId = useId();
 
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Close navigation drawer automatically on route change
+  useEffect(() => {
     setOpen(false);
   }, [pathname]);
 
+  // Handle ESC key press & lock body scroll when open
   useEffect(() => {
     if (!open) return;
+
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpen(false);
     };
+
     document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
+
     return () => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
@@ -31,101 +43,123 @@ export function MobileNav() {
 
   return (
     <div className="md:hidden">
+      {/* Trigger Button */}
       <button
         type="button"
-        className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-base font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)]"
         aria-expanded={open}
         aria-controls={panelId}
+        aria-label={open ? "Close menu" : "Open menu"}
         onClick={() => setOpen((v) => !v)}
+        className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-amber-900/50 bg-[#1f120a] text-amber-300 hover:bg-amber-900/40 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 active:scale-95 transition-all shadow-md [-webkit-tap-highlight-color:transparent]"
       >
-        <span className="sr-only">{open ? "Close menu" : "Open menu"}</span>
-        <span aria-hidden className="flex flex-col gap-1.5">
-          <span
-            className={cn(
-              "block h-0.5 w-4 bg-foreground transition",
-              open && "translate-y-2 rotate-45",
-            )}
-          />
-          <span
-            className={cn(
-              "block h-0.5 w-4 bg-foreground transition",
-              open && "opacity-0",
-            )}
-          />
-          <span
-            className={cn(
-              "block h-0.5 w-4 bg-foreground transition",
-              open && "-translate-y-2 -rotate-45",
-            )}
-          />
-        </span>
+        {open ? (
+          <X className="h-5 w-5 text-amber-300" />
+        ) : (
+          <Menu className="h-5 w-5 text-amber-300" />
+        )}
       </button>
 
-      {open ? (
-        <div className="fixed inset-0 z-50 md:hidden">
-          <button
-            type="button"
-            className="absolute inset-0 bg-foreground/40"
-            aria-label="Close menu overlay"
+      {/* Slide-over Portal with createPortal to escape header containing block */}
+      {mounted && open && createPortal(
+        <div className="fixed inset-0 z-[100] flex md:hidden isolate">
+          {/* Dark Blurred Backdrop using fixed positioning */}
+          <div
+            className="fixed inset-0 bg-black/80 backdrop-blur-md transition-opacity"
+            aria-hidden="true"
             onClick={() => setOpen(false)}
           />
+
+          {/* Drawer Navigation Panel */}
           <nav
             id={panelId}
-            className="absolute top-0 right-0 flex h-full w-[min(100%,20rem)] flex-col bg-[var(--surface-elevated)] p-6 shadow-xl"
-            aria-label="Mobile"
+            aria-label="Mobile Navigation"
+            className="relative ml-auto flex h-full w-[min(100%,20rem)] flex-col justify-between border-l border-amber-900/50 bg-[#160c07] text-amber-50 shadow-2xl z-10 overflow-y-auto"
           >
-            <div className="mb-6 flex items-center justify-between border-b border-[var(--border)] pb-4">
-              <div className="flex items-center gap-2.5">
-                <div className="relative h-9 w-9 shrink-0 overflow-hidden rounded-full border border-amber-500/30">
-                  <Image
-                    src="/images/logo.svg"
-                    alt={`${BRAND.name} Logo`}
-                    fill
-                    sizes="36px"
-                    className="object-contain"
-                  />
-                </div>
-                <span className="font-display font-bold text-lg text-[var(--brand-primary)]">
-                  {BRAND.shortName}
-                </span>
+            <div>
+              {/* Drawer Top Bar */}
+              <div className="flex h-16 items-center justify-between border-b border-amber-900/40 bg-[#120804] px-5">
+                <Link
+                  href="/"
+                  onClick={() => setOpen(false)}
+                  className="flex items-center gap-2.5 focus-visible:outline-none"
+                >
+                  <div className="relative h-9 w-9 shrink-0 overflow-hidden rounded-full border border-amber-500/40 shadow-sm">
+                    <Image
+                      src="/images/logo.svg"
+                      alt={`${BRAND.name} Logo`}
+                      fill
+                      sizes="36px"
+                      className="object-contain"
+                    />
+                  </div>
+                  <span className="font-display font-bold text-base text-white tracking-tight">
+                    {BRAND.shortName}
+                  </span>
+                </Link>
+
+                <button
+                  type="button"
+                  onClick={() => setOpen(false)}
+                  aria-label="Close menu"
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-amber-900/50 bg-[#1f120a] text-amber-300 hover:text-white active:scale-95 transition-all [-webkit-tap-highlight-color:transparent]"
+                >
+                  <X className="h-5 w-5" />
+                </button>
               </div>
-              <button
-                type="button"
-                className="rounded-full px-3 py-1 text-sm opacity-70 hover:opacity-100 font-semibold"
-                onClick={() => setOpen(false)}
-              >
-                Close
-              </button>
+
+              {/* Nav Links */}
+              <div className="p-4 space-y-1">
+                <p className="px-3 text-[10px] font-bold uppercase tracking-widest text-amber-500/80 mb-2">
+                  Navigation
+                </p>
+                <ul className="space-y-1">
+                  {NAV_LINKS.map((link) => {
+                    const active = pathname === link.href;
+                    return (
+                      <li key={link.href}>
+                        <Link
+                          href={link.href}
+                          className={cn(
+                            "flex items-center justify-between rounded-xl px-3.5 py-3 text-sm font-semibold transition-all [-webkit-tap-highlight-color:transparent]",
+                            active
+                              ? "bg-amber-500/20 text-amber-300 border-l-4 border-amber-400 pl-3"
+                              : "text-amber-100/90 active:bg-amber-500/20 hover:bg-amber-500/10 hover:text-white",
+                          )}
+                        >
+                          <span>{link.label}</span>
+                          <ChevronRight
+                            className={cn(
+                              "h-4 w-4 transition-transform",
+                              active ? "text-amber-400" : "text-amber-500/40",
+                            )}
+                          />
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
             </div>
-            <ul className="space-y-1">
-              {NAV_LINKS.map((link) => {
-                const active = pathname === link.href;
-                return (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className={cn(
-                        "block rounded-xl px-3 py-3.5 text-lg font-medium",
-                        active
-                          ? "bg-[var(--accent-soft)] text-[var(--brand-primary)]"
-                          : "hover:bg-foreground/5",
-                      )}
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-            <Link
-              href="/visit"
-              className="mt-6 inline-flex items-center justify-center rounded-full bg-[var(--brand-primary)] px-6 py-3.5 text-base font-semibold text-[var(--surface)]"
-            >
-              Order / Visit
-            </Link>
+
+            {/* Bottom Actions */}
+            <div className="border-t border-amber-900/50 bg-[#120804] p-5 space-y-3">
+              <Link
+                href="/visit"
+                onClick={() => setOpen(false)}
+                className="flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 px-5 py-3.5 text-sm font-bold text-slate-950 shadow-lg shadow-amber-600/20 hover:from-amber-400 hover:to-amber-500 active:scale-[0.98] transition-all [-webkit-tap-highlight-color:transparent]"
+              >
+                <ShoppingBag className="h-4 w-4 shrink-0" />
+                <span>Order / Visit Us</span>
+              </Link>
+
+              <p className="text-center text-[10px] text-amber-300/60 font-medium uppercase tracking-wider">
+                Authentic Lake Victoria Tilapia
+              </p>
+            </div>
           </nav>
-        </div>
-      ) : null}
+        </div>,
+        document.body
+      )}
     </div>
   );
 }

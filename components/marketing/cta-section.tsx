@@ -6,8 +6,7 @@ import { CTA_IMAGE } from "@/lib/data/unsplash";
 
 export function CtaSection() {
   return (
-    <Section className="relative overflow-hidden bg-[#120804] text-white py-20 lg:py-28 border-t border-amber-900/50">
-      
+    <Section className="relative overflow-hidden bg-[#120804] text-white py-14 sm:py-20 lg:py-28 border-t border-amber-900/50">
       {/* Background Image with Dark Gradient Overlay */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -20,49 +19,60 @@ export function CtaSection() {
         <div className="absolute inset-0 bg-gradient-to-r from-[#180e08] via-[#140b06]/95 to-[#0e0603]" />
       </div>
 
-      {/* Glow effect */}
-      <div className="pointer-events-none absolute bottom-0 right-0 h-96 w-96 rounded-full bg-amber-500/20 blur-[130px] animate-pulse-glow" />
+      {/* Ambient Glow Effect */}
+      <div className="pointer-events-none absolute -bottom-20 -right-20 h-72 w-72 sm:h-96 sm:w-96 rounded-full bg-amber-500/20 blur-[80px] sm:blur-[120px]" />
 
-      <div className="relative z-10 max-w-3xl space-y-6">
-        <div className="inline-flex items-center gap-2 rounded-full bg-amber-500/15 border border-amber-500/40 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-amber-300 shadow-md backdrop-blur-md">
-          <Sparkles className="h-4 w-4 text-amber-400 animate-spin" />
+      <div className="relative z-10 max-w-3xl space-y-4 sm:space-y-6">
+        {/* Eyebrow Badge */}
+        <div className="inline-flex items-center gap-2 rounded-full bg-amber-500/15 border border-amber-500/40 px-3.5 py-1.5 text-[10px] sm:text-xs font-bold uppercase tracking-wider text-amber-300 shadow-md backdrop-blur-md">
+          <Sparkles className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-amber-400 shrink-0" />
           <span>Unforgettable Dining Awaits</span>
         </div>
 
-        <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.1]">
-          Ready to Experience Nairobi’s Legendary <br />
-          <span className="text-gold-gradient">Tilapia Feast</span>?
+        {/* Heading */}
+        <h2 className="font-display text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-tight sm:leading-[1.1] text-balance">
+          Ready to Experience Nairobi’s Legendary{" "}
+          <span className="text-amber-400 bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 bg-clip-text text-transparent">
+            Tilapia Feast
+          </span>
+          ?
         </h2>
 
-        <p className="text-lg sm:text-xl text-amber-100/90 leading-relaxed font-normal">
-          Whether you’re joining us for lunch at Hurlingham, hosting a family celebration, or ordering fresh hot fish delivered right to your door — we’re ready to serve you with heart.
+        {/* Description */}
+        <p className="text-xs sm:text-base lg:text-lg text-amber-100/90 leading-relaxed font-normal">
+          Whether you’re joining us for lunch at Hurlingham, hosting a family
+          celebration, or ordering fresh hot fish delivered right to your door —
+          we’re ready to serve you with heart.
         </p>
 
-        <div className="pt-4 flex flex-wrap items-center gap-4">
+        {/* Responsive Action Buttons Stack */}
+        <div className="pt-2 sm:pt-4 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 sm:gap-4">
           <Button
             href="/visit"
             size="lg"
-            className="bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-bold hover:from-amber-400 hover:to-amber-500 shadow-xl shadow-amber-500/25 border-none transition-all duration-300 hover:scale-105"
+            className="w-full sm:w-auto justify-center bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-bold hover:from-amber-400 hover:to-amber-500 shadow-xl shadow-amber-500/20 border-none transition-all duration-300"
           >
-            <Calendar className="h-5 w-5" />
+            <Calendar className="h-4 w-4 sm:h-5 sm:w-5 shrink-0" />
             <span>Plan Your Visit</span>
           </Button>
 
           <Button
             href="/catering"
             size="lg"
-            className="bg-amber-500/15 hover:bg-amber-500/25 text-amber-200 border border-amber-500/40 backdrop-blur-md transition-all duration-300 hover:scale-105 font-bold"
+            variant="outline"
+            className="w-full sm:w-auto justify-center border-amber-500/40 text-amber-200 bg-amber-500/10 hover:bg-amber-500/20 font-bold"
           >
-            <Utensils className="h-5 w-5 text-amber-400" />
+            <Utensils className="h-4 w-4 sm:h-5 sm:w-5 text-amber-400 shrink-0" />
             <span>Catering & Groups</span>
           </Button>
 
           <Button
             href="/contact"
             size="lg"
-            className="bg-white/10 hover:bg-white/20 text-white border border-white/25 backdrop-blur-md transition-all duration-300 hover:scale-105 font-semibold"
+            variant="ghost"
+            className="w-full sm:w-auto justify-center border border-white/20 bg-white/5 hover:bg-white/10 text-white font-semibold"
           >
-            <PhoneCall className="h-5 w-5 text-amber-400" />
+            <PhoneCall className="h-4 w-4 sm:h-5 sm:w-5 text-amber-400 shrink-0" />
             <span>Get in Touch</span>
           </Button>
         </div>
@@ -70,5 +80,3 @@ export function CtaSection() {
     </Section>
   );
 }
-
-
