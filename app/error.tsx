@@ -73,17 +73,13 @@ export default function Error({
           <span>Try Again</span>
         </Button>
 
-        <Button
-          asChild
-          variant="outline"
-          size="lg"
-          className="w-full sm:w-auto gap-2 font-semibold min-h-[44px]"
+        <Link
+          href="/"
+          className="inline-flex items-center justify-center gap-2 rounded-xl border border-[var(--border)] bg-[var(--surface-elevated)] px-6 py-3 text-sm font-semibold text-[var(--foreground)] hover:border-amber-500/50 hover:bg-amber-500/10 transition-all w-full sm:w-auto min-h-[44px]"
         >
-          <Link href="/">
-            <Home className="h-4 w-4" />
-            <span>Return Home</span>
-          </Link>
-        </Button>
+          <Home className="h-4 w-4" />
+          <span>Return Home</span>
+        </Link>
       </div>
     </main>
   );
