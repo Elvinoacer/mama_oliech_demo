@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { Home, BookOpen, Users, Compass, UtensilsCrossed } from "lucide-react";
@@ -13,7 +14,7 @@ const QR_LINKS = [
   { href: "/table/menu", label: "Menu", icon: UtensilsCrossed },
 ] as const;
 
-export function HeritageNav() {
+function HeritageNavContent() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const branch = searchParams.get("branch");
@@ -30,7 +31,6 @@ export function HeritageNav() {
             ? pathname === link.href
             : pathname === link.href || pathname.startsWith(`${link.href}/`);
 
-        // Preserve ?branch= parameter across table navigation
         const targetUrl = branch
           ? `${link.href}?branch=${encodeURIComponent(branch)}`
           : link.href;
@@ -61,5 +61,17 @@ export function HeritageNav() {
         );
       })}
     </nav>
+  );
+}
+
+export function HeritageNav() {
+  return (
+    <Suspense
+      fallback={
+        <div className="h-14 w-full rounded-full bg-black/90 animate-pulse" />
+      }
+    >
+      <HeritageNavContent />
+    </Suspense>
   );
 }
